@@ -21,5 +21,3 @@ U
 next.config.js,8/1/811a6d5a2e04fadb44d8eec365f2fa8af5c4facf
 M
 src/components/dom/Header.tsx,1/5/152d44da46ff5a020b7273e329e7f0933189b13b
-J
-src/stores/projectStore.ts,b/8/b82e261036452539263d5042d0b517c41b08cc79
