@@ -1,16 +1,50 @@
 "use client";
 
 import TextSplitter from "@/components/dom/utils/TextSplitter";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 const Page = () => {
+  const introductionRef = useRef<HTMLDivElement>(null!);
+  const refs = useRef<Array<Element>>([]);
+
+  // Adding a target to be observed
+  useEffect(() => {
+    gsap.to(introductionRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      delay: 0.8,
+    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            gsap.to(entry.target, {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+            });
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    refs.current.forEach((ref) => {
+      observer.observe(ref);
+    });
+  }, []);
+
   return (
     <main>
-      <section>
+      <section className="mb-64">
         <TextSplitter type={"h1"} delay={0.5}>
           About me
         </TextSplitter>
-
-        <div className="max-w-xl flex flex-col gap-4">
+        <div
+          ref={introductionRef}
+          className="max-w-xl  flex flex-col gap-4 opacity-0 translate-y-16"
+        >
           <p>
             I am a passionate engineering student specializing in IT, currently
             enrolled in an engineering school. My journey into the world of web
@@ -28,8 +62,20 @@ const Page = () => {
       </section>
 
       <section className="my-32">
-        <h2>Education</h2>
-        <p className="max-w-6xl">
+        <h2
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="opacity-0 translate-y-16"
+        >
+          Education
+        </h2>
+        <p
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="max-w-6xl opacity-0 translate-y-16"
+        >
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
           cum deserunt dignissimos distinctio dolore doloremque impedit
           inventore laboriosam laudantium maiores nihil, nobis obcaecati,
@@ -51,8 +97,20 @@ const Page = () => {
         </p>
       </section>
       <section className="my-32">
-        <h2>Ambitions</h2>
-        <p className="max-w-6xl">
+        <h2
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="opacity-0 translate-y-16"
+        >
+          Ambitions
+        </h2>
+        <p
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="max-w-6xl opacity-0 translate-y-16"
+        >
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
           cum deserunt dignissimos distinctio dolore doloremque impedit
           inventore laboriosam laudantium maiores nihil, nobis obcaecati,
@@ -74,8 +132,20 @@ const Page = () => {
         </p>
       </section>
       <section className="my-32">
-        <h2>Hobbies</h2>
-        <p className="max-w-6xl">
+        <h2
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="opacity-0 translate-y-16"
+        >
+          Hobbies
+        </h2>
+        <p
+          ref={(node) => {
+            refs.current.push(node as Element);
+          }}
+          className="max-w-6xl opacity-0 translate-y-16"
+        >
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
           cum deserunt dignissimos distinctio dolore doloremque impedit
           inventore laboriosam laudantium maiores nihil, nobis obcaecati,
